@@ -13,7 +13,8 @@ RUN apk del libc6-compat && \
 # Install python
 ENV PYTHONUNBUFFERED=1
 RUN apk add --update --no-cache python3==3.9.7-r4 python3-dev==3.9.7-r4 && ln -sf python3 /usr/bin/python && \
-    python3 -m ensurepip && pip3 install --no-cache --upgrade pip==22.0.4 setuptools==60.10.0
+    python3 -m ensurepip && pip3 install --no-cache-dir --upgrade pip==22.0.4 setuptools==60.10.0 && \
+    apk --no-cache del curl && rm -rf /var/cache/apk/* && rm -rf /var/lib/apt/lists/*
 
 # Install AWS CLI
 RUN apk --no-cache --update add curl==7.80.0-r0  && \
